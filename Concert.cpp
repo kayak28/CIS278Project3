@@ -19,11 +19,15 @@ bool getSeatNo(int& value);
 int main()
 {
 	const int  MAXSEATS = 15;
-	//cout << "How many seats are in the hall??";
-	//cin >> MAXSEATS; 
-	
+	int length;
+	cout << "How many seats are in the hall??";
+	cin >> length;
+      
 	int seats[MAXSEATS];
-	for(int index = 0; index < MAXSEATS; index++)
+	length = MAXSEATS - 1;
+	
+	
+	for(int index = 0; index < length; index++)
 	{
 		seats[index] = 0;
 		cout << seats[index];
@@ -72,12 +76,9 @@ bool validSeatNum(int seatNo, int size)
 bool seatVacant(int seatNo, int seats[])
 {	
 	bool vacantSeat = false;// assuming no vacant seat there
-	if(validSeatNum(seatNo, size))
+	if(seats[seatNo] == 0)//indicate seatNo is available  
 	{
-		if(seats[seatNo] == 0)//indicate seatNo is available  
-		{
 			vacantSeat = true;
-		}
 	}
 	else
 	{
@@ -149,7 +150,21 @@ void pair(int seats[], int size)
 	}
 }
 bool getSeatNo(int& value)
-{
+{	
+	bool isDigit = false;
+	char seatNum [10];
+	char setNumber;
+	cout << "Enter seat number";
+	cin >>  
+	//check array is contained digit or not
+	for(int index = 0; index < 10; index++)
+	{
+		if(!isdigit(seatNum[index]))
+		{
+			isDigit = false;
+			return isDigit;
+		}
+	}
 	
 }
 
