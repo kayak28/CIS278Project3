@@ -148,7 +148,10 @@ void pair(int seats[], int size)
 		cout << "All seats are already reseaved";
 	}
 }
-
+bool getSeatNo(int& value)
+{
+	
+}
 
 
 
