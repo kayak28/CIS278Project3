@@ -20,8 +20,6 @@ int main()
 {
 	const int  MAXSEATS = 15;
 	int length;
-	cout << "How many seats are in the hall??";
-	cin >> length;
       
 	int seats[MAXSEATS];
 	length = MAXSEATS - 1;
@@ -153,10 +151,10 @@ bool getSeatNo(int& value)
 {	
 	bool isDigit = false;
 	char seatNum [10];
-	char setNumber;
+	
 	cout << "Enter seat number";
-	cin >>  
-	//check array is contained digit or not
+	cin >>  seatNum;
+	//check array is contained digit char or not
 	for(int index = 0; index < 10; index++)
 	{
 		if(!isdigit(seatNum[index]))
