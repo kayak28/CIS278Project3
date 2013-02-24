@@ -1,6 +1,6 @@
 #include<iostream>
 #include<cstring>
-
+#include "math.h"
 using namespace std;
 //method definiton 
 bool soldOut(int seats[], int size);
@@ -8,6 +8,7 @@ int seatsLeft(int seats[], int size);
 bool validSeatNum(int seatNo, int size);
 bool seatVacant(int seatNo, int seats[]);
 bool reserveSeat(int seatNo, int seats[], int size);
+bool cancelSeat(int seatNo, int seats[],int size)
 int furthestFront(int seats[], int size);
 void pair(int seats[], int size);
 bool getSeatNo(int& value);
@@ -20,16 +21,60 @@ int main()
 {
 	const int  MAXSEATS = 15;
 	int length;
-      
+	int action = 0;
+      	int seatNum = 0 ;
 	int seats[MAXSEATS];
 	length = MAXSEATS - 1;
+
+	do{
+		cout << "the start";
+		cout << "what action do you want to do?" 
+		     << "1: reserve a seat\n2: cancel reservation";
+		cout << "3: check sold-out\n4: print pair seat"
+		     << "5: status of all seats\n6: print how many seats are left"; 
+		cin >> action;
+		if(action == 1|| action ==2 )
+		{//selection 1 or 2 need seatNo.
+			do
+			{
+				getSeatNo(seatNum);
+			}while(!getSeatNo(seatNum))
+			if(action == 1)
+			{//make a reservation
+				reserveSeat(seatNum, seats[], length);
+			}
+			else if(action == 2)
+			{//cancel?
+				
+			}
+		}
+		else if(action == 3)
+		{//print our if the concert is sold out or not
+			if(soldOut(seat[], length))
+			{
+				cout << "Sorry this concert is already sold out";
+			}
+			else
+			{
+				cout << "there is " << seatLeft(seat[], size) << " vacant seats, please reservation ASAP"; 
+			} 
+		}
+		else if(action == 4)
+		{//print pair seat
+			cout << pair(); 
+		}
+		else if(action == 5)
+		{//status of all seats
+			
+		}	
+		else if(action == 6)
+		{//print how many seats are left
+			cout << "there is" << seatLeft(seat[], size) << "left";
+		}	
+	}while(action < 0)
 	
-	
-	for(int index = 0; index < length; index++)
-	{
-		seats[index] = 0;
-		cout << seats[index];
-	} 
+	cout << "thank you for using this reservation program."	
+	cout<< "the end \n\n\n programmed by Kaya Ota";	 
 
 	return 0;
 }//main
@@ -105,12 +150,28 @@ bool reserveSeat(int seatNo, int seats[], int size)
 	}
 	return reservation;
 }
+bool cancelSeat(int seatNo, int seats[],int  size)
+{
+	bool cancel = false;
+	if(seats[seatNo] == 1)
+	{
+		seats[seatNo]== 0;
+		cancel = true;
+	}
+	else
+	{
+		cout<< seatNo <<"has not reserved.";
+		cancel = false;
+	}
+	return cancel;
+
+}
 int furthestFront(int seats[], int size)
 {
 	int index;
 	if(!soldOut(seats, size))
 	{	
-		for(index = 0; index < size; index++)
+		for(index = 0; index > size; index--)
 		{	
 			if(seats[index] == 0)
 			{
@@ -144,18 +205,20 @@ void pair(int seats[], int size)
 	}
 	else 
 	{
-		cout << "All seats are already reseaved";
+		cout << "there is no pair seats";
 	}
 }
 bool getSeatNo(int& value)
 {	
+	bool valid = false;
 	bool isDigit = false;
-	char seatNum [10];
-	
+	char seatNum [3];
+	int num = 0 ;
+	int power = 2;
 	cout << "Enter seat number";
 	cin >>  seatNum;
 	//check array is contained digit char or not
-	for(int index = 0; index < 10; index++)
+	for(int index = 0; index < 3; index++)
 	{
 		if(!isdigit(seatNum[index]))
 		{
@@ -163,7 +226,23 @@ bool getSeatNo(int& value)
 			return isDigit;
 		}
 	}
-	
+	for(int index = 0; index < 3 ; index++)
+	{
+		//num = seatNum[index] - '0';//convert char to int
+		num +=( seatNum[index] - '0') *pow(10.0, power);
+		power--;
+	//	cout << "num" << num; 
+	}
+	cout << num << "\n"; 	
+	if(num < 15)
+	{
+		valid = true;
+	}		
+	else
+	{
+		valid = false;
+	}
+	return valid;
 }
 
 
