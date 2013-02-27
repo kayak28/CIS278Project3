@@ -10,7 +10,7 @@ bool validSeatNum(int seats[], int size);
 int seatVacant(int seatNo, int seats[]);
 bool reserveSeat(int seatNo, int seats[]);
 int furthestFront(int seats[], int size);
-void PairSeats(int seats[], int size);
+void pairSeats(int seats[], int size);
 bool getSeatNo(int& value);
 bool cancelSeat(int seatNo, int seats[]);
 void seatsStatus(int size, int seats[]);
@@ -22,40 +22,70 @@ int main()
 	int seats[length];
 	int action = 0;
 	int seatNum =0;
-	/*
-	for(int index = 0; index < length; index++)
-	{
-		seats[index] =0;
-	}
-	cancelSeat(7, seats);
-
-	if(getSeatNo(seatNum))
-	{
-		cout << "return = true"<< "\n";
-	}
-	else 
-	{
-		cout << "return = false" << "\n";
-	}
-	cout <<"getNum ="<< getSeatNo(seatNum);
-
-	cout << "seatNum" << seatNum;
-	*/
-	
 	do
 	{
-		cout<<"Type number that you want to manupilate";
-		cout << "1:  "
+		cout  << "1: reserve a seat\n2: cancel reservation\n";
+		cout << "3: check sold-out\n4: print pair seat\n"
+		     << "5: status of all seats\n6: print how many seats are left\n";
+		cout << "Enter negative number  to end";
+		cin >> action;
+		switch (action)
+		{
+			case 1:
+				//make a resevation
+				while(!(getSeatNo(seatNum)));
+				reserveSeat(seatNum, seats);
+				cout << "\nresevation is done\n";
+				break;
+			case 2:
+				//cancel a reserved seat
+				while(!(getSeatNo(seatNum)));
+				cancelSeat(seatNum, seats);
+				cout << "\ncansel is done\n";
+				break;
+			case 3:
+				//check if there is a empty seat or not
+				if(soldOut(seats, length))
+				{
+					cout << "this hell has already been reserved";
+				}
+				else
+				{
+					cout << "this hall is still have a seat";
+				}
+				cout << "\nsold out is done \n";
+				break;
+			case 4:	 //find pair seats
+				pairSeats(seats, length);
+				cout << "\npair is done\n";
+				break;
+			case 5: // status of all seats
+				seatsStatus(length, seats);
+				cout << "\nstatus is over\n";
+				break;
+			case 6:
+				seatsLeft(seats, length);
+				cout << "seatLeft";
+				break;
+		} 
+	}while(!(action < 0));
+   
+	cout << "\nthank you for using this reservation program.\n";	
+	cout << "\nthe end \n\n\n programmed by Kaya Ota\n";	
+
+	
+	
+
 	return 0;
 }
 
 bool getSeatNo(int& value)
 {
 	bool digit = true;
-	char seatNum[3];
+	char seatNum[2];
 	int num =0;
-	int length = 3;
-	int power = 2;
+	int length = 2;
+	int power = 1;
 	for(int index = 0; index < length; index++)
 	{
 		seatNum[index] = 0;
@@ -115,7 +145,7 @@ bool reserveSeat(int seatNo, int seats[])
 		seats[seatNo] = 1;
 		success = true;
 	}
-	else
+	else if(seats[seatNo] ==1)
 	{
 		cout << "sorry this seat is already reserved\n";
 		success =false;
@@ -168,18 +198,18 @@ int furthestFront(int seats[], int size)
 		}
 	}
 }
-void PairSeats(int seats[], int size);
+void pairSeats(int seats[], int size)
 {
 	for(int index = 0 ; index < size; index++)
 	{
-		if(seats[]index == 0 && seats[index +1] == 0)
+		if(seats[index] == 0 && seats[index +1] == 0)
 		{
 			cout << index << "and" << index + 1
-			     << "are available pair seat";
+			     << "are available pair seat\n";
 		}
 		else
 		{
-			cout << "there is no pair seat";
+			cout << "there is no pair seat\n";
 		}
 	}
 
