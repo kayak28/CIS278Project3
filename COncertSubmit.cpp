@@ -2,11 +2,11 @@
  *CIS278 Spring 2013
  *Created on 2013/02/27, 23:41
  *File:Concert.cpp
- *
  */
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include<cstdlib>
 using namespace std;
 //function list
 bool soldOut(int seats[], int size);//determines if all  seats are sold
@@ -21,7 +21,6 @@ bool cancelSeat(int seatNo, int seats[], int size);//cancel a seat
 void showStatus(int seats[], int size);   
 //main
 int main() 
-
 {
 	int const MAXSEATS = 10;//decide how seats array is long
 	int  seats [MAXSEATS];//declare array named seats with its length  
@@ -83,7 +82,8 @@ int main()
 		case 7:
                 	showStatus(seats,MAXSEATS);
                		break;
-        }while(action == 0);//switch
+		}//switch
+        }while(action != 0);//while
 	return 0;
 }
 void showStatus(int seats[], int size)
@@ -96,7 +96,7 @@ void showStatus(int seats[], int size)
         }
         else if(seats[index] == 1)
         {
-            cout <<"Seat " << index<< " is taken.\n";
+            cout <<"Seat " << index<< " is not available.\n";
         }
         else
         {
@@ -108,7 +108,7 @@ bool soldOut(int seats[], int size)
 {
      bool soldOut = true;
      int index = 0;
-     for (index = 0; index < size;index++)
+     for(index = 0; index < size;index++)
      {
         if (seats[index] != 0)
         { 
@@ -198,7 +198,7 @@ int furthestFront(int seats[], int size)
 {
       int index = 0;
       int furthest = 0;
-      for(index = 0; index < size; count++)
+      for(index = 0; index < size; index++)
       {
           if(seats[index] == 0)
           {
@@ -229,4 +229,15 @@ bool getSeatNo(int& value)
       }      
       value = atoi(seatNum);
       return validSeat;
+}
+void pairSeat(int seats[], int size)
+{
+	int index = 0;
+	for(index = size; index > 0; index--)
+	{
+		if(seats[index]==0 && seats[index+1] == 0)
+		{
+			cout << index  << "&" << index+1 <<" are available for pair seats";
+		}
+	}
 } 
